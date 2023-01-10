@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2 : Validate the email</title>
+</head>
+<body>
+    <form>
+        <input type="email" name="email" id="email" />
+        <button type="button">Submit</button>
+    </form>
+    <script>
+        // 2. Write your own javascript validation function to check if the entered value is a valid email address. The address should contain some valid characters, and the @ sign, more characters then a . (period) and some more characters. 
+        function isValidEmail1(str) { // without regex
+            let parts = str.split('@')
+            if (parts.length == 2) {
+                let username = parts[0]
+                let domainParts = parts[1].split('.')
+                if(domainParts.length >= 2) {
+                    return true
+                }
+            }
+            return false
+        }
+        
+        function isValidEmail2(str) { // with regex
+            return /^[a-z0-9+.-]+@[a-z0-9.-]+\.[a-z]+$/i.test(str)
+        }
+
+        document.querySelector('button').onclick = function() {
+            let email = document.querySelector('#email').value
+            console.log(`isValidEmail1(${email}) :`, isValidEmail1(email))
+            console.log(`isValidEmail2(${email}) :`, isValidEmail2(email))
+        }
+    </script>
+</body>
+</html>
